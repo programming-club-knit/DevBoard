@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevBoard | Developer Productivity Dashboard</title>
+    <meta
+      name="description"
+      content="DevBoard is a productivity dashboard for Hack the Web contributors."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body data-theme="dark">
+    <div class="app-shell">
+      <header class="topbar">
+        <nav class="navbar container" aria-label="Main navigation">
+          <div class="brand" aria-label="DevBoard home">
+            <div class="brand-mark">D</div>
+            <span>DevBoard</span>
+          </div>
+
+          <div class="nav-links" aria-label="Page links">
+            <a href="#overview">Overview</a>
+            <a href="#tasks">Tasks</a>
+            <a href="#activity">Activity</a>
+            <a href="#contributors">Contributors</a>
+          </div>
+
+          <div class="nav-actions">
+            <button id="theme-toggle" class="btn btn-ghost" type="button" aria-label="Toggle theme">
+              <span class="theme-icon">☀</span>
+              <span class="theme-text">Light</span>
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      <main class="container main-content">
+        <section class="hero" id="overview">
+          <div>
+            <p class="eyebrow">Hack the Web</p>
+            <h1>Developer dashboard for open-source contributors</h1>
+            <p class="hero-copy">
+              Organize issues, track progress, and ship meaningful contribution work with a
+              clean workspace built for the event.
+            </p>
+          </div>
+          <div class="hero-card">
+            <div class="status-pill">Live sprint</div>
+            <strong>6 contribution issues</strong>
+            <small>Ready for review and merge</small>
+          </div>
+        </section>
+
+        <section class="stats-grid" aria-label="Dashboard summary">
+          <article class="stat-card">
+            <span>Total Tasks</span>
+            <strong id="total-tasks">0</strong>
+            <small>all tracked work</small>
+          </article>
+          <article class="stat-card">
+            <span>Completed</span>
+            <strong id="completed-tasks">0</strong>
+            <small>finished</small>
+          </article>
+          <article class="stat-card">
+            <span>Pending</span>
+            <strong id="pending-tasks">0</strong>
+            <small>still active</small>
+          </article>
+          <article class="stat-card accent">
+            <span>Progress</span>
+            <strong id="progress-value">0%</strong>
+            <small>completion rate</small>
+          </article>
+        </section>
+
+        <section class="dashboard-layout" id="tasks">
+          <div class="panel task-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Workspace</p>
+                <h2>Task board</h2>
+              </div>
+              <span class="badge" id="task-count-badge">0 tasks</span>
+            </div>
+
+            <div class="toolbar">
+              <label class="search-field">
+                <span class="sr-only">Search tasks</span>
+                <input id="search-input" type="search" placeholder="Search tasks..." />
+              </label>
+
+              <div class="filter-group">
+                <label>
+                  <span class="sr-only">Priority filter</span>
+                  <select id="priority-filter" aria-label="Filter by priority">
+                    <option value="all">All priorities</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                </label>
+
+                <label>
+                  <span class="sr-only">Status filter</span>
+                  <select id="status-filter" aria-label="Filter by status">
+                    <option value="all">All status</option>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <form id="task-form" class="task-form" novalidate>
+              <div class="field-group">
+                <label for="task-title">Task title</label>
+                <input id="task-title" name="title" type="text" placeholder="Add a task..." />
+                <small id="title-error" class="helper-text" aria-live="polite"></small>
+              </div>
+
+              <div class="field-row">
+                <div class="field-group compact">
+                  <label for="task-priority">Priority</label>
+                  <select id="task-priority" name="priority">
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Add task</button>
+              </div>
+            </form>
+
+            <div id="task-loading" class="loading-message hidden" aria-live="polite">
+              Loading tasks...
+            </div>
+
+            <ul id="task-list" class="task-list" aria-live="polite"></ul>
+          </div>
+
+          <aside class="panel sidebar-panel" id="activity">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Recent actions</p>
+                <h2>Activity log</h2>
+              </div>
+            </div>
+
+            <ul id="activity-log" class="activity-log"></ul>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <div id="notification" class="notification hidden" role="status" aria-live="polite"></div>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
